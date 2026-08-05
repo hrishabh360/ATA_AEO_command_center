@@ -1,0 +1,6 @@
+API KEY.txt
+.env
+.env.*
+config.js
+*.key
+*secret*

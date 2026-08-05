@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page Planner — AEO Command Center</title>
+<script>(function(){var t=localStorage.getItem('ata-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">
+    <span class="nav-eyebrow">aitrustedadvisors.com</span>
+    <span class="nav-name">AEO Command Center</span>
+  </a>
+  <div class="nav-links">
+    <a href="content-gap.html"         class="nav-link"><i class="ti ti-search"></i><span>Content gap</span></a>
+    <a href="aeo-optimizer.html"       class="nav-link"><i class="ti ti-adjustments"></i><span>AEO optimizer</span></a>
+    <a href="reddit-monitor.html"      class="nav-link"><i class="ti ti-brand-reddit"></i><span>Reddit monitor</span></a>
+    <a href="content-generator.html"   class="nav-link"><i class="ti ti-pencil"></i><span>Content generator</span></a>
+    <a href="citation-tracker.html"    class="nav-link"><i class="ti ti-chart-bar"></i><span>Citation tracker</span></a>
+    <a href="page-planner.html"        class="nav-link active"><i class="ti ti-file-description"></i><span>Page planner</span></a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode">
+    <i class="ti ti-sun" id="theme-icon"></i>
+  </button>
+</nav>
+
+<main class="page">
+
+  <div class="key-bar">
+    <i class="ti ti-key" aria-hidden="true"></i>
+    <input type="password" id="api-key" placeholder="Paste your Anthropic API key here (sk-ant-...)" oninput="checkKey()" autocomplete="off" />
+    <span class="key-status key-none" id="key-status">No key</span>
+  </div>
+
+  <div class="page-intro">
+    <div class="page-intro-icon"><i class="ti ti-file-description"></i></div>
+    <div class="page-intro-body">
+      <h1 class="page-intro-title">Page Planner</h1>
+      <p class="page-intro-desc">Generate a complete, writer-ready content brief for any of the four audit-identified priority pages. Each brief includes the target keyword and search volume, recommended title tag, meta description, and H1, a section-by-section outline, snippet opportunities for AI citation, proof points to include, three FAQ items, and an internal link plan.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-title"><i class="ti ti-file-description"></i>Build a content brief</div>
+    <p class="hint">The four pages below are ranked by audit priority. The comparison article (/compare/best-conversation-intelligence-platforms) is the highest-impact — AI engines quote roundups most frequently, making it the fastest path to getting Spiral cited.</p>
+    <div class="row">
+      <div class="col">
+        <label for="page">Priority page</label>
+        <select id="page">
+          <option value="/">/ — Homepage (reframe Spiral as primary product)</option>
+          <option value="/spiral">/spiral — Customer Intelligence Platform hub</option>
+          <option value="/spiral/conversation-analytics">/spiral/conversation-analytics — New feature page</option>
+          <option value="/compare/best-conversation-intelligence-platforms">/compare/best-conversation-intelligence-platforms — New comparison article</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"><label for="notes">Extra context / notes</label><input type="text" id="notes" placeholder="e.g. use Turo as the primary proof case, target enterprise CX buyers" /></div>
+      <button class="run-btn" id="run-btn" onclick="runTool()"><i class="ti ti-sparkles"></i>Generate brief</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-title">Content brief</div>
+    <div class="output-wrap">
+      <button class="copy-btn hidden" id="copy-btn" onclick="copyOut()"><i class="ti ti-copy"></i> Copy</button>
+      <div class="output empty" id="out">Your content brief will appear here.</div>
+    </div>
+  </div>
+
+  <p class="note">
+    <i class="ti ti-lock" style="font-size:12px"></i>
+    Your API key stays in this browser session only — never sent anywhere except Anthropic. &nbsp;
+    Get a key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>
+  </p>
+
+</main>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+const PAGE_DATA = {
+  '/': { kw: 'AI Trusted Advisors (brand + navigational)', type: 'Homepage / brand hub', intent: 'Brand + routing authority to P1 pages', problem: 'H1 still says "AI Receptionist & Voice AI Agents" — Spiral should be primary. Must route authority to /spiral, /spiral/conversation-analytics, and /compare/best-conversation-intelligence-platforms.' },
+  '/spiral': { kw: 'customer intelligence platform (KD 4, 320/mo)', type: 'Product hub landing page', intent: 'Commercial — enterprise CX buyer evaluating platforms', problem: 'Page ranks for no commercial keyword. H1 repeats "Intelligence" twice. Title and meta not pointed at the money term.' },
+  '/spiral/conversation-analytics': { kw: 'conversation analytics (KD 19, 90/mo)', type: 'Feature landing page (nested under /spiral)', intent: 'Mixed informational + commercial', problem: 'Page does not exist yet. SERP rewards a page that defines the discipline, then pivots to a differentiated product.' },
+  '/compare/best-conversation-intelligence-platforms': { kw: 'best conversation intelligence platforms (comparison roundup)', type: 'Comparison / alternatives listicle', intent: 'Commercial — buyer shortlisting vendors', problem: 'Page does not exist. Spiral is in 0/13 roundups. Primary AEO/GEO citation asset. Must be balanced and scoped to enterprise CX (not sales-coaching) to be citable.' }
+};
+
+function runTool() {
+  const system = "You are an SEO and AEO content strategist for B2B SaaS. You write concise, actionable content briefs. Spiral's differentiators: autonomous root-cause discovery, 100% conversation coverage, cross-channel (beyond contact center), financial impact scoring. Proof: Turo (74% revenue growth, $8M revenue boost), Remitly, Owlet, Whitepages.";
+  const prompt = () => {
+    const page  = document.getElementById('page').value;
+    const notes = document.getElementById('notes').value;
+    const p = PAGE_DATA[page];
+    return `Write a concise, actionable content brief for aitrustedadvisors.com:
+
+Page: ${page}
+Primary keyword: ${p.kw}
+Page type: ${p.type}
+Search intent: ${p.intent}
+Core problem to fix: ${p.problem}
+${notes ? 'Extra context: ' + notes : ''}
+
+Deliver the brief in this exact structure:
+
+## Page brief: ${page}
+
+**Primary keyword:** [keyword + search volume]
+**Page type:** [type]
+**Recommended title tag:** [under 60 chars]
+**Recommended meta description:** [under 155 chars]
+**Recommended H1:** [clear, keyword-rich]
+
+### SERP structure (what Google rewards here)
+[3–4 bullets on what top-ranking pages do]
+
+### Section outline
+[Numbered list of H2s with one-line description each]
+
+### Snippet opportunities
+[2–3 specific snippets Spiral should own — write the actual 1–2 sentence answer]
+
+### Proof points to include
+[3–4 specific stats or customer names from Spiral's proof set]
+
+### FAQ (3 items)
+[Q + 2-sentence A for each]
+
+### Internal links
+[Which other priority pages this page should link to, with anchor text]`;
+  };
+  run(system, prompt);
+}
+</script>
+</body>
+</html>

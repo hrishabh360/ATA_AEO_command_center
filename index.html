@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEO Command Center — aitrustedadvisors.com</title>
+<script>(function(){var t=localStorage.getItem('ata-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<div class="dash-topbar">
+  <div class="dash-brand">
+    <span class="nav-eyebrow">aitrustedadvisors.com</span>
+    <span class="nav-name">AEO Command Center</span>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode">
+    <i class="ti ti-sun" id="theme-icon"></i>
+  </button>
+</div>
+
+<div class="dash-page">
+
+  <div class="dash-hero">
+    <div class="dash-eyebrow">Answer Engine Optimization</div>
+    <h1 class="dash-title">Get <span>Spiral cited</span><br>by AI engines</h1>
+    <p class="dash-subtitle">Six tools to close the citation gap — from finding content opportunities to generating publish-ready briefs. Built around the Spiral and AI Voice Agents content strategy.</p>
+  </div>
+
+  <div class="dash-key-wrap">
+    <div class="key-bar">
+      <i class="ti ti-key" aria-hidden="true"></i>
+      <input type="password" id="api-key" placeholder="Paste your Anthropic API key here (sk-ant-…) — saved for the session" oninput="checkKey()" autocomplete="off" />
+      <span class="key-status key-none" id="key-status">No key</span>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+
+    <a class="tool-card" href="pages/content-gap.html" style="--c1:#4f7fff;--c2:#7c5fff">
+      <div class="tool-card-icon"><i class="ti ti-search"></i></div>
+      <div class="tool-card-title">Content Gap Analyzer</div>
+      <p class="tool-card-desc">Discover the questions enterprise CX buyers ask that Spiral isn't answering yet — the exact gaps where competitors get cited by AI engines instead.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a class="tool-card" href="pages/aeo-optimizer.html" style="--c1:#7c5fff;--c2:#a855f7">
+      <div class="tool-card-icon"><i class="ti ti-adjustments"></i></div>
+      <div class="tool-card-title">AEO Content Optimizer</div>
+      <p class="tool-card-desc">Paste any existing page and get it rewritten for AI citation — snippet-ready opening, FAQ blocks, key-facts bullets, and authoritative language engines extract verbatim.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a class="tool-card" href="pages/reddit-monitor.html" style="--c1:#ff4500;--c2:#ff6534">
+      <div class="tool-card-icon"><i class="ti ti-brand-reddit"></i></div>
+      <div class="tool-card-title">Reddit Opportunity Monitor</div>
+      <p class="tool-card-desc">Fetch real, live Reddit posts matching your keywords, then get AI-crafted reply angles grounded in what people are actually discussing right now.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a class="tool-card" href="pages/content-generator.html" style="--c1:#059669;--c2:#10b981">
+      <div class="tool-card-icon"><i class="ti ti-pencil"></i></div>
+      <div class="tool-card-title">Citation-Worthy Content Generator</div>
+      <p class="tool-card-desc">Generate publish-ready FAQs, guides, comparisons, and definitions structured the way AI engines prefer — direct answers, specific stats, clear headings.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a class="tool-card" href="pages/citation-tracker.html" style="--c1:#d97706;--c2:#f59e0b">
+      <div class="tool-card-icon"><i class="ti ti-chart-bar"></i></div>
+      <div class="tool-card-title">Brand Citation Tracker</div>
+      <p class="tool-card-desc">Audit where Spiral stands in AI-generated answers for any buyer query. Get a citability score, gap analysis, and a prioritized 90-day action plan.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a class="tool-card" href="pages/page-planner.html" style="--c1:#0891b2;--c2:#3b82f6">
+      <div class="tool-card-icon"><i class="ti ti-file-description"></i></div>
+      <div class="tool-card-title">Page Planner</div>
+      <p class="tool-card-desc">Generate a complete, writer-ready content brief for any of the four audit-identified priority pages — title tag, H1, section outline, snippet opportunities, FAQ, and internal link plan.</p>
+      <div class="tool-card-footer">Open tool <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+  </div>
+
+  <p class="note" style="margin-top:2rem;text-align:center">
+    <i class="ti ti-lock" style="font-size:12px"></i>
+    Your API key stays in this browser session only — never sent anywhere except Anthropic. &nbsp;
+    Get a key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>
+  </p>
+
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
